@@ -4,5 +4,5 @@ A (very simple) example project using [crawlie the cralwer](https://hex.pm/packa
 
 To run the example run:
 ```
-$ mix crawlie_example https://google.com/
+$ mix crawlie.example google.com https://mainframe.com/
 ```
