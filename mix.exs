@@ -29,6 +29,6 @@ defmodule CrawlieExample.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:crawlie, "~> 0.1.0"}]
+    [{:crawlie, "~> 0.1.1"}]
   end
 end

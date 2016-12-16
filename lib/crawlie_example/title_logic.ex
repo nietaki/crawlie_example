@@ -11,6 +11,7 @@ defmodule CrawlieExample.TitleLogic do
           # in case the title isn't a valid UTF-8 string
           |> Enum.filter(fn(c) -> c >= 32 and c <= 126 end)
           |> to_string
+          |> List.wrap
     end
 
   end

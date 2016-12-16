@@ -26,7 +26,7 @@ defmodule Mix.Tasks.Crawlie.Example do
 
     # the third argument of Crawlie.crawl! contains both the crawlie custom options
     # and HTTPoison options
-    results = Crawlie.crawl!(urls, CrawlieExample.TitleLogic, [follow_redirect: true, timeout: 7000])
+    results = Crawlie.crawl(urls, CrawlieExample.TitleLogic, [timeout: 7000])
 
     results
       |> Enum.map(&("title tag: " <> &1))

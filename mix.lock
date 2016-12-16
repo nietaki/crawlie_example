@@ -1,5 +1,5 @@
 %{"certifi": {:hex, :certifi, "0.7.0", "861a57f3808f7eb0c2d1802afeaae0fa5de813b0df0979153cbafcd853ababaf", [:rebar3], []},
-  "crawlie": {:hex, :crawlie, "0.1.0", "0606ba8c2d432ad40a469acf03b2cca99706baa04d5a5675195d4e658badba26", [:mix], [{:gen_stage, "~> 0.9.0", [hex: :gen_stage, optional: false]}, {:httpoison, "~> 0.10.0", [hex: :httpoison, optional: false]}]},
+  "crawlie": {:hex, :crawlie, "0.1.1", "be50dba11ce2a2dc96bb05d806c7a088701e20428afad9ff30132e747f837007", [:mix], [{:gen_stage, "~> 0.9.0", [hex: :gen_stage, optional: false]}, {:httpoison, "~> 0.10.0", [hex: :httpoison, optional: false]}]},
   "gen_stage": {:hex, :gen_stage, "0.9.0", "9daf0b5ae224405e0456b7df5a282a9a958176cdb9b963811ca38140e7e1b3c4", [:mix], []},
   "hackney": {:hex, :hackney, "1.6.3", "d489d7ca2d4323e307bedc4bfe684323a7bf773ecfd77938f3ee8074e488e140", [:rebar3, :mix], [{:certifi, "0.7.0", [hex: :certifi, optional: false]}, {:idna, "1.2.0", [hex: :idna, optional: false]}, {:metrics, "1.0.1", [hex: :metrics, optional: false]}, {:mimerl, "1.0.2", [hex: :mimerl, optional: false]}, {:ssl_verify_fun, "1.1.1", [hex: :ssl_verify_fun, optional: false]}]},
   "httpoison": {:hex, :httpoison, "0.10.0", "4727b3a5e57e9a4ff168a3c2883e20f1208103a41bccc4754f15a9366f49b676", [:mix], [{:hackney, "~> 1.6.3", [hex: :hackney, optional: false]}]},
