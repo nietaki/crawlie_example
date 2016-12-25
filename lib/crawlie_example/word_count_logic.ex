@@ -2,17 +2,18 @@ defmodule CrawlieExample.WordCountLogic do
   @behaviour Crawlie.ParserLogic
 
   def parse(url, body, _options) do
-    IO.puts "parsing " <> url
+    IO.puts "parsing     " <> url
 
     try do
       {:ok, Floki.parse(body)}
     rescue
       _e in CaseClauseError -> {:error, :case_clause_error}
-      _e in RuntimeError -> {:error, :case_clause_error}
+      _e in RuntimeError -> {:error, :runtime_error}
     end
   end
 
-  def extract_data(_url, parsed, _options) do
+  def extract_data(url, parsed, _options) do
+    IO.puts "extracting  " <> url
     paragraphs = Floki.find(parsed, "p")
     text = Floki.text(paragraphs, sep: " ")
     String.split(text, [" ", "\ "], trim: true)
@@ -29,5 +30,6 @@ defmodule CrawlieExample.WordCountLogic do
       |> Enum.map(&("https://en.wikipedia.org" <> &1))
 
     full_urls ++ wiki_urls
+      |> Enum.reject(&String.contains?(&1, "Special:Random")) # to show the results of crawlie are consistent
   end
 end

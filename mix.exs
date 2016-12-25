@@ -30,7 +30,7 @@ defmodule CrawlieExample.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:crawlie, "~> 0.2.0-alpha1"},
+      {:crawlie, "~> 0.2.0-alpha2"},
       # {:crawlie, git: "https://github.com/nietaki/crawlie.git", branch: "master"},
       {:floki, "~> 0.11.0"}, # for HTML parsing
     ]

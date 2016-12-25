@@ -1,6 +1,8 @@
 defmodule Mix.Tasks.Crawlie.Example do
   use Mix.Task
 
+  alias Experimental.Flow
+
   @moduledoc """
   Runs the simple crawlie example.
 
@@ -36,9 +38,8 @@ defmodule Mix.Tasks.Crawlie.Example do
       url_manager_timeout: 2000,
       min_demand: 1,
       max_demand: 5,
-      stages: 30,
       fetch_phase: [
-        stages: 32,
+        stages: 20,
         min_demand: 1,
         max_demand: 5,
       ],
@@ -51,20 +52,19 @@ defmodule Mix.Tasks.Crawlie.Example do
 
     results = Crawlie.crawl(urls, CrawlieExample.WordCountLogic, options)
     results = results
-      |> Enum.reduce(%{}, &count_word/2)
-      # alternatively, instead of the above Enump pipelines, it is possible to do more performant Flow operations
-      # FIXME correct reduce here with partitioning by key
-      # |> Flow.reduce(&Map.new/0, &count_word/2)
-      # |> Flow.departition(&Map.new/0, &map_merge/2, &(&1))
-      # |> Enum.to_list
-      # |> hd
-      |> Enum.map(fn {word, count} -> {count, word} end)
-      |> Enum.sort
-      |> Enum.reverse
-      |> Enum.take(30)
+      |> Flow.partition() # putting same words in same partitions
+      |> Flow.reduce(&Map.new/0, &count_word/2)
+      |> Flow.departition(&Map.new/0, &map_merge/2, & &1)
+      |> Enum.to_list
+      |> hd # reduce and departition return in the end a collection of one map
+      # ## alternatively, instead of the above Flow pipelines, it is possible do that simpler, in one Enum line:
+      # |> Enum.reduce(%{}, &count_word/2)
+      |> Enum.reject(fn {_word, count} -> count < 20 end) # rejecting the words with low counts
+      |> Enum.sort_by(fn{_word, count} -> count end, &>=/2) # sorting decreasingly
+      |> Enum.take(20)
 
     IO.puts "most popular words longer than 4 letters in the vicinity of #{inspect urls}:"
-    IO.puts "{count, word}"
+    IO.puts "{word, count}"
     IO.puts "============="
     Enum.each(results, fn(tuple) -> IO.puts inspect(tuple) end)
   end
