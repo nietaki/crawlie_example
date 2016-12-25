@@ -1,8 +1,6 @@
 defmodule Mix.Tasks.Crawlie.Example do
   use Mix.Task
 
-  alias Experimental.Flow
-
   @moduledoc """
   Runs the simple crawlie example.
 
@@ -35,15 +33,27 @@ defmodule Mix.Tasks.Crawlie.Example do
     # and HTTPoison options
     options = [
       max_depth: 1,
-      url_manager_timeout: 5000,
+      url_manager_timeout: 2000,
       min_demand: 1,
       max_demand: 5,
+      stages: 30,
+      fetch_phase: [
+        stages: 32,
+        min_demand: 1,
+        max_demand: 5,
+      ],
+      process_phase: [
+        stages: 8,
+        min_demand: 5,
+        max_demand: 10,
+      ]
     ]
 
     results = Crawlie.crawl(urls, CrawlieExample.WordCountLogic, options)
     results = results
       |> Enum.reduce(%{}, &count_word/2)
       # alternatively, instead of the above Enump pipelines, it is possible to do more performant Flow operations
+      # FIXME correct reduce here with partitioning by key
       # |> Flow.reduce(&Map.new/0, &count_word/2)
       # |> Flow.departition(&Map.new/0, &map_merge/2, &(&1))
       # |> Enum.to_list
