@@ -35,7 +35,6 @@ defmodule Mix.Tasks.Crawlie.Example do
     # and HTTPoison options
     options = [
       max_depth: 1,
-      url_manager_timeout: 2000,
       min_demand: 1,
       max_demand: 5,
       fetch_phase: [
