@@ -1,6 +1,6 @@
 %{"certifi": {:hex, :certifi, "1.0.0", "1c787a85b1855ba354f0b8920392c19aa1d06b0ee1362f9141279620a5be2039", [:rebar3], []},
-  "crawlie": {:git, "https://github.com/nietaki/crawlie.git", "b748dbd18d74524dda881c4aa037f7af3a50efe9", [branch: "response-struct"]},
-  "floki": {:hex, :floki, "0.12.0", "854496442efd252f8cde8fad9f85ebefdb9e1385255a863eea5fddbe6972cbee", [:mix], [{:mochiweb, "~> 2.15", [hex: :mochiweb, optional: false]}]},
+  "crawlie": {:git, "https://github.com/nietaki/crawlie.git", "871233f81ebbee3c89754d0c3e8c2b69323c8c22", [branch: "response-struct"]},
+  "floki": {:hex, :floki, "0.12.1", "a372aeb6a0630e28644a8278499ba76b3f1ce0890ae30ea10ade7f62870b2038", [:mix], [{:mochiweb, "~> 2.15", [hex: :mochiweb, optional: false]}]},
   "gen_stage": {:hex, :gen_stage, "0.10.0", "ce1eb93a3f9708f2e215f70b3d3c7f55dea4a4ed7e9615195e28d543c9086656", [], []},
   "hackney": {:hex, :hackney, "1.6.6", "5564b4695d48fd87859e9df77a7fa4b4d284d24519f0cd7cc898f09e8fbdc8a3", [:rebar3], [{:certifi, "1.0.0", [hex: :certifi, optional: false]}, {:idna, "4.0.0", [hex: :idna, optional: false]}, {:metrics, "1.0.1", [hex: :metrics, optional: false]}, {:mimerl, "1.0.2", [hex: :mimerl, optional: false]}, {:ssl_verify_fun, "1.1.1", [hex: :ssl_verify_fun, optional: false]}]},
   "heap": {:hex, :heap, "1.0.1", "8ee982f8ac7275ff5d8fe72922d31a9c3458e128e219ff642c51fda007c323d3", [], []},
