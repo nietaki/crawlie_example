@@ -1,7 +1,7 @@
 defmodule CrawlieExample.TitleLogic do
   use Crawlie.ParserLogic
 
-  def extract_data(_url, body, _options) do
+  def extract_data(%{body: body}, _options) do
     # Remember not to parse HTML with regex! http://stackoverflow.com/a/1732454/246337
     case Regex.run(~r/<title>([^<>]*)<\/title>/ims, body, capture: :all_but_first) do
       nil -> "no title recognized"
@@ -13,8 +13,6 @@ defmodule CrawlieExample.TitleLogic do
           |> to_string
           |> List.wrap
     end
-
   end
-
 
 end
