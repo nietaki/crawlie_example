@@ -7,7 +7,7 @@ defmodule Mix.Tasks.Crawlie.Example do
   Runs the simple crawlie example.
 
   Usage:
-      mix crawlie.example https://some.address.com/ google.com http://one-more.org/
+      mix crawlie.example https://en.wikipedia.org/wiki/Xkcd https://en.wikipedia.org/wiki/Garfield
   """
 
   @default_urls [
