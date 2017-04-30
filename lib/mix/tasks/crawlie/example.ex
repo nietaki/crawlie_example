@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Crawlie.Example do
   use Mix.Task
 
-  alias Experimental.Flow
+  alias Flow
 
   @moduledoc """
   Runs the simple crawlie example.
