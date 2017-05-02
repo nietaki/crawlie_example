@@ -24,7 +24,7 @@ defmodule CrawlieExample.WordCountLogic do
       |> Enum.map(&String.downcase/1)
   end
 
-  def extract_links(_response, parsed, _options) do
+  def extract_uris(_response, parsed, _options) do
     hrefs = Floki.attribute(parsed, "a", "href")
 
     full_urls = Enum.filter(hrefs, &String.starts_with?(&1, ["https://en.wikipedia.org"]))

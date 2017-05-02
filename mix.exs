@@ -4,7 +4,7 @@ defmodule CrawlieExample.Mixfile do
   def project do
     [
       app: :crawlie_example,
-      version: "0.4.1",
+      version: "0.5.0",
       elixir: "~> 1.3",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
@@ -30,8 +30,8 @@ defmodule CrawlieExample.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:crawlie, "~> 0.4.1"},
-      # {:crawlie, git: "https://github.com/nietaki/crawlie.git", branch: "uri-page"},
+      {:crawlie, "~> 0.5.0"},
+      # {:crawlie, git: "https://github.com/nietaki/crawlie.git", branch: "better-duplicates"},
       {:floki, "~> 0.12.0"}, # for HTML parsing
     ]
   end
