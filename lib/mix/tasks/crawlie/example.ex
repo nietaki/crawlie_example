@@ -46,7 +46,8 @@ defmodule Mix.Tasks.Crawlie.Example do
         stages: 8,
         min_demand: 5,
         max_demand: 10,
-      ]
+      ],
+      domain: "en.wikipedia.org", # used in WordCountLogic
     ]
 
     results = Crawlie.crawl(urls, CrawlieExample.WordCountLogic, options)
@@ -62,7 +63,7 @@ defmodule Mix.Tasks.Crawlie.Example do
       |> Enum.sort_by(fn{_word, count} -> count end, &>=/2) # sorting decreasingly
       |> Enum.take(20)
 
-    IO.puts "most popular words longer than 4 letters in the vicinity of #{inspect urls}:"
+    IO.puts "most popular words longer than 5 letters in the vicinity of #{inspect urls}:"
     IO.puts "{word, count}"
     IO.puts "============="
     Enum.each(results, fn(tuple) -> IO.puts inspect(tuple) end)
