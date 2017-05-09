@@ -5,12 +5,17 @@ defmodule CrawlieExample.WordCountLogic do
 
   def parse(%Response{} = response, _options) do
     IO.puts "parsing     " <> Response.url(response) 
-
-    try do
-      {:ok, Floki.parse(response.body)}
-    rescue
-      _e in CaseClauseError -> {:error, :case_clause_error}
-      _e in RuntimeError -> {:error, :runtime_error}
+    case Response.content_type_simple(response) do
+      "text/html" ->
+        try do
+          {:ok, Floki.parse(response.body)}
+        rescue
+          _e in CaseClauseError -> {:error, :case_clause_error}
+          _e in RuntimeError -> {:error, :runtime_error}
+        end
+      unsupported ->
+        IO.puts "Content-Type unsupported by the WordCountLogic: #{unsupported}"
+        {:error, :skip}
     end
   end
 
@@ -20,19 +25,22 @@ defmodule CrawlieExample.WordCountLogic do
     paragraphs = Floki.find(parsed, "p")
     text = Floki.text(paragraphs, sep: " ")
     String.split(text, [" ", "\ "], trim: true)
-      |> Enum.filter(&(String.length(&1) > 4))
+      |> Enum.filter(&(String.length(&1) > 5))
       |> Enum.map(&String.downcase/1)
   end
 
-  def extract_uris(_response, parsed, _options) do
+  def extract_uris(response, parsed, options) do
+    current_uri = response.uri
     hrefs = Floki.attribute(parsed, "a", "href")
+    uris = Enum.map(hrefs, &URI.merge(current_uri, &1))
 
-    full_urls = Enum.filter(hrefs, &String.starts_with?(&1, ["https://en.wikipedia.org"]))
-    wiki_urls = hrefs
-      |> Enum.filter(&String.starts_with?(&1, ["/wiki/"]))
-      |> Enum.map(&("https://en.wikipedia.org" <> &1))
+    uris =
+    case Keyword.get(options, :domain) do
+      domain when is_binary(domain) -> Enum.filter(uris, &(&1.host == domain))
+      _ -> uris
+    end
 
-    full_urls ++ wiki_urls
-      |> Enum.reject(&String.contains?(&1, "Special:Random")) # to show the results of crawlie are consistent
+    # to show the results of crawlie are consistent
+    Enum.reject(uris, fn(uri) -> String.contains?(uri.path || "", "Special:Random") end)
   end
 end
