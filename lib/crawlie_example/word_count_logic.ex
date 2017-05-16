@@ -4,7 +4,7 @@ defmodule CrawlieExample.WordCountLogic do
   alias Crawlie.Response
 
   def parse(%Response{} = response, _options) do
-    IO.puts "parsing     " <> Response.url(response) 
+    # IO.puts "parsing     " <> Response.url(response) 
     case Response.content_type_simple(response) do
       "text/html" ->
         try do
@@ -19,8 +19,8 @@ defmodule CrawlieExample.WordCountLogic do
     end
   end
 
-  def extract_data(response, parsed, _options) do
-    IO.puts "extracting  " <> Response.url(response)
+  def extract_data(_response, parsed, _options) do
+    # IO.puts "extracting  " <> Response.url(response)
 
     paragraphs = Floki.find(parsed, "p")
     text = Floki.text(paragraphs, sep: " ")

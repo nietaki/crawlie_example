@@ -50,7 +50,9 @@ defmodule Mix.Tasks.Crawlie.Example do
       domain: "en.wikipedia.org", # used in WordCountLogic
     ]
 
-    results = Crawlie.crawl(urls, CrawlieExample.WordCountLogic, options)
+    {stats_ref, results} = Crawlie.crawl_and_track_stats(urls, CrawlieExample.WordCountLogic, options)
+    stats_printing_task = Task.async(fn -> periodically_dump_stats(stats_ref) end)
+
     results = results
       |> Flow.partition() # putting same words in same partitions
       |> Flow.reduce(&Map.new/0, &count_word/2)
@@ -67,6 +69,12 @@ defmodule Mix.Tasks.Crawlie.Example do
     IO.puts "{word, count}"
     IO.puts "============="
     Enum.each(results, fn(tuple) -> IO.puts inspect(tuple) end)
+    IO.puts ""
+
+    Task.await(stats_printing_task)
+
+    IO.puts "FINAL STATS:"
+    IO.inspect(Crawlie.Stats.Server.get_stats(stats_ref))
   end
 
   def count_word(word, map) do
@@ -75,5 +83,18 @@ defmodule Mix.Tasks.Crawlie.Example do
 
   def map_merge(m1, m2) do
     Map.merge(m1, m2, fn(_k, v1, v2) -> v1 + v2 end)
+  end
+
+  def periodically_dump_stats(ref) do
+    stats = Crawlie.Stats.Server.get_stats(ref)
+    IO.puts "STATS AFTER #{Crawlie.Stats.Server.Data.elapsed_usec(stats) / 1_000_000} SECONDS"
+    IO.inspect(stats)
+    IO.puts ""
+    if Crawlie.Stats.Server.Data.finished?(stats) do
+      :ok
+    else
+      Process.sleep(2000)
+      periodically_dump_stats(ref)
+    end
   end
 end

@@ -1,5 +1,5 @@
 %{"certifi": {:hex, :certifi, "1.0.0", "1c787a85b1855ba354f0b8920392c19aa1d06b0ee1362f9141279620a5be2039", [:rebar3], []},
-  "crawlie": {:hex, :crawlie, "0.5.0", "e054275af154f59be28990f02165c9f1deaca0140d4d29c07c879c8059a7d34b", [:mix], [{:flow, "~> 0.11.1", [hex: :flow, optional: false]}, {:gen_stage, "~> 0.11.0", [hex: :gen_stage, optional: false]}, {:httpoison, "~> 0.10.0", [hex: :httpoison, optional: false]}, {:pqueue, "~> 1.5", [hex: :pqueue, optional: false]}]},
+  "crawlie": {:hex, :crawlie, "0.6.0", "31539ec6d05c4337274259ce448ed249ba161a22aeca8c3506d91f4b0be52ade", [:mix], [{:flow, "~> 0.11.1", [hex: :flow, optional: false]}, {:gen_stage, "~> 0.11.0", [hex: :gen_stage, optional: false]}, {:httpoison, "~> 0.10.0", [hex: :httpoison, optional: false]}, {:pqueue, "~> 1.5", [hex: :pqueue, optional: false]}]},
   "floki": {:hex, :floki, "0.12.1", "a372aeb6a0630e28644a8278499ba76b3f1ce0890ae30ea10ade7f62870b2038", [:mix], [{:mochiweb, "~> 2.15", [hex: :mochiweb, optional: false]}]},
   "flow": {:hex, :flow, "0.11.1", "cbc35a0236520cc5fec7b5863cd8431cb1e77297c5c9119055676355eb1fb5a6", [:mix], [{:gen_stage, "~> 0.11.0", [hex: :gen_stage, optional: false]}]},
   "gen_stage": {:hex, :gen_stage, "0.11.0", "943bdfa85c75fa624e0a36a9d135baad20a523be040178f5a215444b45c66ea4", [:mix], []},
