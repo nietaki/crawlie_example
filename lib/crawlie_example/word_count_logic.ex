@@ -15,7 +15,7 @@ defmodule CrawlieExample.WordCountLogic do
         end
       unsupported ->
         IO.puts "Content-Type unsupported by the WordCountLogic: #{unsupported}"
-        {:error, :skip}
+        {:skip, :unsupported_content_type}
     end
   end
 
